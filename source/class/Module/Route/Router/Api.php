@@ -7,8 +7,8 @@ namespace Planck\Extension\Tool\Module\Route\Router;
 
 
 use Planck\Extension\Tool\ImageUploader;
-use Planck\Route;
-use Planck\Router;
+use Planck\Routing\Route;
+use Planck\Routing\Router;
 
 class Api extends Router
 {
@@ -19,7 +19,20 @@ class Api extends Router
 
 
 
-        $this->all('dump', '`/tool/route/dump`', function () {
+        $this->get('get-routes', '`/tool/route/get-routes`', function() {
+
+            $routes = $this->getApplication()->getRoutes();
+            echo json_encode(
+                array_keys($routes)
+            );
+
+        })->json()
+
+        ;
+
+
+
+        $this->all('dump-request', '`/tool/route/dump-request`', function () {
 
             echo json_encode(array(
                 'post' => $this->post(),

@@ -5,7 +5,7 @@ namespace Planck\Extension\Tool\Module\I18n\Router;
 
 
 
-use Planck\Router;
+use Planck\Routing\Router;
 use Planck\ModuleResourceLoader;
 
 

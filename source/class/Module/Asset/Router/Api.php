@@ -7,7 +7,7 @@ namespace Planck\Extension\Tool\Module\Asset\Router;
 use Planck\Extension\Tool\Module\Asset\Controller\LocalCSSFileSender;
 use Planck\Extension\Tool\Module\Asset\Controller\LocalJavascriptFileSender;
 use Planck\Helper\File;
-use Planck\Router;
+use Planck\Routing\Router;
 use Planck\ModuleResourceLoader;
 
 

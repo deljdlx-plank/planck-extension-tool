@@ -7,8 +7,8 @@ namespace Planck\Extension\Tool\Module\Resource\Router;
 
 
 use Planck\Extension\Tool\ImageUploader;
-use Planck\Route;
-use Planck\Router;
+use Planck\Routing\Route;
+use Planck\Routing\Router;
 
 class Api extends Router
 {
