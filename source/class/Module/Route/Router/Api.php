@@ -7,7 +7,9 @@ namespace Planck\Extension\Tool\Module\Route\Router;
 
 
 use Planck\Extension\Tool\ImageUploader;
+use Planck\Extension\Tool\Module\I18n\Controller\I18n;
 use Planck\Routing\Route;
+use Planck\Routing\RouteDescriptor;
 use Planck\Routing\Router;
 
 class Api extends Router
@@ -22,12 +24,29 @@ class Api extends Router
         $this->get('get-routes', '`/tool/route/get-routes`', function() {
 
             $routes = $this->getApplication()->getRoutes();
+
+
+            $descriptors = [];
+            foreach ($routes as $routeName => $route) {
+                if($route->hasDescriptor()) {
+                    $descriptors[$routeName] = $route->getDescriptor();
+                }
+                else {
+                    $descriptors[$routeName] = false;
+                }
+            }
+
+
             echo json_encode(
-                array_keys($routes)
+                $descriptors
             );
 
         })->json()
-
+            ->setBuilder('/tool/route/get-routes')
+            ->setDescriptor(new RouteDescriptor(array(
+                'label' => \Planck\Extension\Tool\Helper\I18n::localize('Listing des routes'),
+                'description' => \Planck\Extension\Tool\Helper\I18n::localize('Liste et décrit les routes disponibles'),
+            )))
         ;
 
 
