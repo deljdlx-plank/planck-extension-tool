@@ -13,7 +13,7 @@ class I18n
 
 
         if(!$localization) {
-            $localization = \Planck\ApplicationRegistry::getInstance()->get('default-lang');
+            $localization = \Planck\Application\ApplicationRegistry::getInstance()->get('default-lang');
         }
 
 
@@ -40,10 +40,10 @@ class I18n
     public static function getI18NAllPackages($localization = null)
     {
         if(!$localization) {
-            $localization = \Planck\ApplicationRegistry::getInstance()->get('default-lang');
+            $localization = \Planck\Application\ApplicationRegistry::getInstance()->get('default-lang');
         }
 
-        $dir = opendir(\Planck\ApplicationRegistry::getInstance()->get('lang-filepath-root').'/'.$localization);
+        $dir = opendir(\Planck\Application\ApplicationRegistry::getInstance()->get('lang-filepath-root').'/'.$localization);
 
         $packages = array();
 
@@ -66,10 +66,10 @@ class I18n
     {
 
         if(!$localization) {
-            $localization = \Planck\ApplicationRegistry::getInstance()->get('default-lang');
+            $localization = \Planck\Application\ApplicationRegistry::getInstance()->get('default-lang');
         }
 
-        $file = \Planck\ApplicationRegistry::getInstance()->get('lang-filepath-root').'/'.$localization.'/'.$packageName.'.php';
+        $file = \Planck\Application\ApplicationRegistry::getInstance()->get('lang-filepath-root').'/'.$localization.'/'.$packageName.'.php';
 
 
         if(is_file($file)) {
