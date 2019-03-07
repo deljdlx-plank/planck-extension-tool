@@ -7,6 +7,7 @@ namespace Planck\Extension\Tool\Module\Resource\Router;
 
 
 use Planck\Extension\Tool\ImageUploader;
+use Planck\Helper\File;
 use Planck\Routing\Route;
 use Planck\Routing\Router;
 
@@ -32,6 +33,25 @@ class Api extends Router
 
 
 
+
+        $this->all('/tool/resource/jsonp', '`/tool/resource/api/jsonp`', function () {
+
+            $asset = $this->get('asset');
+            $callback = $this->get('callback');
+            $file = $this->getApplication()->getPublicFilepath().'/'.File::sanitizePath($asset);
+
+            $buffer = '';
+            if(is_file($file)) {
+                $buffer = $callback.'('.file_get_contents($file).');';
+            }
+
+            echo $buffer;
+
+        })->javascript()
+        ->setBuilder(function(string $asset, string $callback) {
+            return '/tool/resource/api/jsonp&asset='.$asset.'&callback='.$callback;
+        })
+        ;
 
 
 

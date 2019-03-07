@@ -6,6 +6,7 @@ namespace Planck\Extension\Tool\Module\Route\Router;
 
 
 
+use Planck\Exception;
 use Planck\Extension\Tool\ImageUploader;
 use Planck\Extension\Tool\Module\I18n\Controller\I18n;
 use Planck\Routing\Route;
@@ -29,11 +30,20 @@ class Api extends Router
             $descriptors = [];
             foreach ($routes as $routeName => $route) {
                 if($route->hasDescriptor()) {
-                    $descriptors[$routeName] = $route->getDescriptor();
+                    $descriptors[$routeName] = $route->getDescriptor()->jsonSerialize();
                 }
                 else {
-                    $descriptors[$routeName] = false;
+                    $descriptor = new RouteDescriptor();
+                    $descriptor->setRoute($route);
+                    $descriptors[$routeName] = $descriptor->jsonSerialize();
                 }
+
+                $descriptors[$routeName]['canonicalURL'] = $this->getApplication()->buildRoute('extension-route', array(
+                    $route
+                ));
+
+
+
             }
 
 
